@@ -20,15 +20,38 @@ let chad = new Person({
 })
 
 const createAndSavePerson = (done) => {
-  done(null /*, data*/);
-};
+  let chad = new Person({
+    name:'chad',
+    age: 24,
+    favoriteFood: ['ice-cream','bread']
+  })
+  chad.save((err , data) => {
+    if(err){
+      console.log(err);
+    }else {
+      done(null,data);
+    }
+  })
+}
 
 const createManyPeople = (arrayOfPeople, done) => {
-  done(null /*, data*/);
+  Person.create(arrayOfPeople, (error,data) => {
+    if(error){
+      console.log(error)
+    }else {
+      done(null , data);
+    }
+  })
 };
 
 const findPeopleByName = (personName, done) => {
-  done(null /*, data*/);
+  Person.find({name:personName}, (error,  data) => {
+    if(error){
+      console.log(error)
+    }else{
+      done(null,data)
+    }
+  })
 };
 
 const findOneByFood = (food, done) => {
