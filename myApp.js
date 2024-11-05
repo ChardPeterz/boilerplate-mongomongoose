@@ -1,7 +1,23 @@
 require('dotenv').config();
+const mongoose = require('mongoose');
 
+let MONGO_URI='mongodb+srv://chardpeter10:7oCZFBNHT4H0MaIX@chardscluster.32vi5.mongodb.net/?retryWrites=true&w=majority&appName=ChardsCluster';
 
-let Person;
+mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
+let personSchema = new mongoose.Schema ({
+  name: String,
+  age: Number,
+  favoriteFoods: [String]
+})
+
+let Person = mongoose.model('Person',personSchema);
+
+let chad = new Person({
+  name:'chad',
+  age: 24,
+  favoriteFood: ['ice-cream','bread']
+})
 
 const createAndSavePerson = (done) => {
   done(null /*, data*/);
